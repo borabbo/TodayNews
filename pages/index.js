@@ -1,115 +1,94 @@
-import Image from "next/image";
-import { Geist, Geist_Mono } from "next/font/google";
-
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
+import Hero from '../components/Hero';
+import Navigation from '../components/Navigation';
+import PostCard from '../components/PostCard';
 
 export default function Home() {
+  const featuredPosts = [
+    {
+      title: "The Road Ahead",
+      excerpt: "The road ahead might be longer - it might not be.",
+      image: "https://images.unsplash.com/photo-1579033461380-adb47c3eb938",
+      category: "PHOTOGRAPHY",
+      author: {
+        name: "Jennifer Parks",
+        avatar: "https://randomuser.me/api/portraits/women/12.jpg"
+      },
+      date: "09/25/2023"
+    },
+    {
+      title: "From Top Down",
+      excerpt: "Once a year, go someplace you've never been before.",
+      image: "https://images.unsplash.com/photo-1682686581030-7fa4ea2b96c3",
+      category: "ADVENTURE",
+      author: {
+        name: "Benjamin Cruz",
+        avatar: "https://randomuser.me/api/portraits/men/32.jpg"
+      },
+      date: "09/25/2023"
+    }
+  ];
+
+  const recentPosts = [
+    {
+      title: "The Road Ahead",
+      excerpt: "The road ahead might be longer - it might not be.",
+      image: "https://images.unsplash.com/photo-1579033461380-adb47c3eb938",
+      category: "PHOTOGRAPHY",
+      author: {
+        name: "Jennifer Parks",
+        avatar: "https://randomuser.me/api/portraits/women/12.jpg"
+      },
+      date: "09/25/2023"
+    },
+    {
+      title: "Hot Standing Tall",
+      excerpt: "Life begins at the end of your comfort zone.",
+      image: "https://images.unsplash.com/photo-1682686580950-960d1d513532",
+      category: "TRAVEL",
+      author: {
+        name: "Michael Johnson",
+        avatar: "https://randomuser.me/api/portraits/men/22.jpg"
+      },
+      date: "09/25/2023"
+    },
+    {
+      title: "Sunny Side Up",
+      excerpt: "No matter how you feel, get up, dress up, show up.",
+      image: "https://images.unsplash.com/photo-1682686578289-cf9c8c472c9b",
+      category: "ADVENTURE",
+      author: {
+        name: "Sarah Wilson",
+        avatar: "https://randomuser.me/api/portraits/women/22.jpg"
+      },
+      date: "09/25/2023"
+    }
+  ];
+
   return (
-    <div
-      className={`${geistSans.className} ${geistMono.className} grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]`}
-    >
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm/6 text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2 tracking-[-.01em]">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-[family-name:var(--font-geist-mono)] font-semibold">
-              pages/index.js
-            </code>
-            .
-          </li>
-          <li className="tracking-[-.01em]">
-            Save and see your changes instantly.
-          </li>
-        </ol>
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=default-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full sm:w-auto md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=default-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
-        </div>
+    <div className="min-h-screen bg-white">
+      <Hero />
+      <Navigation />
+      
+      <main className="max-w-screen-xl mx-auto px-4 py-12">
+        <section className="mb-16">
+          <h2 className="text-2xl font-bold mb-8">Featured Posts</h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            {featuredPosts.map((post, index) => (
+              <PostCard key={index} post={post} featured={true} />
+            ))}
+          </div>
+        </section>
+
+        <section>
+          <h2 className="text-2xl font-bold mb-8">Most Recent</h2>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            {recentPosts.map((post, index) => (
+              <PostCard key={index} post={post} />
+            ))}
+          </div>
+        </section>
       </main>
-      <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=default-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=default-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=default-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
     </div>
   );
 }
+
