@@ -128,7 +128,7 @@ export default function Home() {
     fetchNewsData();
   }, []);
 
-  // URL 해시 처리
+  // URL 해시 처리 및 해시 변경 시 뉴스 데이터 재로딩
   useEffect(() => {
     const handleHashChange = () => {
       const hash = window.location.hash.slice(1);
@@ -137,6 +137,7 @@ export default function Home() {
       } else {
         setActiveSection('google-news');
       }
+      fetchNewsData(); // 해시가 바뀔 때마다 뉴스 다시 불러오기
     };
 
     handleHashChange();
