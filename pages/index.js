@@ -12,7 +12,7 @@ export default function Home() {
   const [lastUpdated, setLastUpdated] = useState(null);
 
   // Apps Script 웹앱 URL
-  const API_URL = 'https://script.google.com/macros/s/AKfycbwvxj7zutLqLkRsPTHRHigqpceucOjD70AGuTIPIB9J4G2dJLEO1VaTZnchV-aqg40k/exec';
+  const API_URL = process.env.NEXT_PUBLIC_API_URL;
 
   // 구글 뉴스 제목에서 언론사 추출
   const getGooglePublisher = (title) => {

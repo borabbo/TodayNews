@@ -1,10 +1,17 @@
 import Link from 'next/link';
+import { useRouter } from 'next/router';
 
 const Navigation = ({ onSectionChange, activeSection }) => {
+  const router = useRouter();
+
   const handleClick = (e, section) => {
     e.preventDefault();
-    if (onSectionChange) {
+    if (router.pathname !== '/') {
+      // 메인 페이지가 아니면 메인으로 이동하면서 hash 변경
+      router.push(`/#${section}`);
+    } else if (onSectionChange) {
       onSectionChange(section);
+      window.location.hash = `#${section}`;
     }
   };
 
